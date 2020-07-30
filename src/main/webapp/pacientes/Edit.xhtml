@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PacientesEditDlg" widgetVar="PacientesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPacientesTitle}">
+            <h:form id="PacientesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pacientesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_tipoDocumento}" for="tipoDocumento" />
+                        <p:inputText id="tipoDocumento" value="#{pacientesController.selected.tipoDocumento}" title="#{bundle.EditPacientesTitle_tipoDocumento}" />
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_numDoc}" for="numDoc" />
+                        <p:inputText id="numDoc" value="#{pacientesController.selected.numDoc}" title="#{bundle.EditPacientesTitle_numDoc}" />
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_primerNombre}" for="primerNombre" />
+                        <p:inputText id="primerNombre" value="#{pacientesController.selected.primerNombre}" title="#{bundle.EditPacientesTitle_primerNombre}" />
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_segundoNombre}" for="segundoNombre" />
+                        <p:inputText id="segundoNombre" value="#{pacientesController.selected.segundoNombre}" title="#{bundle.EditPacientesTitle_segundoNombre}" />
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_primerApellido}" for="primerApellido" />
+                        <p:inputText id="primerApellido" value="#{pacientesController.selected.primerApellido}" title="#{bundle.EditPacientesTitle_primerApellido}" />
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_segundoApellido}" for="segundoApellido" />
+                        <p:inputText id="segundoApellido" value="#{pacientesController.selected.segundoApellido}" title="#{bundle.EditPacientesTitle_segundoApellido}" />
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{pacientesController.selected.fechaNacimiento}" title="#{bundle.EditPacientesTitle_fechaNacimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_direccionPaciente}" for="direccionPaciente" />
+                        <p:inputText id="direccionPaciente" value="#{pacientesController.selected.direccionPaciente}" title="#{bundle.EditPacientesTitle_direccionPaciente}" />
+                        <p:outputLabel value="#{bundle.EditPacientesLabel_telefonoPaciente}" for="telefonoPaciente" />
+                        <p:inputText id="telefonoPaciente" value="#{pacientesController.selected.telefonoPaciente}" title="#{bundle.EditPacientesTitle_telefonoPaciente}" />
+                        <p:outputLabel value="#{bundle.CreatePacientesLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{pacientesController.selected.idUsuario}" >
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"
+                                           itemLabel="#{idUsuarioItem.usuario}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePacientesLabel_idEstado}" for="idEstado" />
+                        <p:selectOneMenu id="idEstado" value="#{pacientesController.selected.idEstado}" >
+                            <f:selectItems value="#{estadoController.itemsAvailableSelectOne}"
+                                           var="idEstadoItem"
+                                           itemValue="#{idEstadoItem}"
+                                           itemLabel="#{idEstadoItem.nombreEstado}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pacientesController.update}" value="#{bundle.Save}" update="display,:PacientesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PacientesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PacientesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

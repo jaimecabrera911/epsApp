@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CentroMedicoViewDlg" widgetVar="CentroMedicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCentroMedicoTitle}">
+            <h:form id="CentroMedicoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{centroMedicoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCentroMedicoLabel_idCm}"/>
+                        <h:outputText value="#{centroMedicoController.selected.idCm}" title="#{bundle.ViewCentroMedicoTitle_idCm}"/>
+                        <h:outputText value="#{bundle.ViewCentroMedicoLabel_nomCm}"/>
+                        <h:outputText value="#{centroMedicoController.selected.nomCm}" title="#{bundle.ViewCentroMedicoTitle_nomCm}"/>
+                        <h:outputText value="#{bundle.ViewCentroMedicoLabel_direccionCm}"/>
+                        <h:outputText value="#{centroMedicoController.selected.direccionCm}" title="#{bundle.ViewCentroMedicoTitle_direccionCm}"/>
+                        <h:outputText value="#{bundle.ViewCentroMedicoLabel_telefonoCm}"/>
+                        <h:outputText value="#{centroMedicoController.selected.telefonoCm}" title="#{bundle.ViewCentroMedicoTitle_telefonoCm}"/>
+                        <h:outputText value="#{bundle.ViewCentroMedicoLabel_idLocalidad}"/>
+                        <h:outputText value="#{centroMedicoController.selected.idLocalidad.nombreLocalidad}" title="#{bundle.ViewCentroMedicoTitle_idLocalidad}"/>
+                        <h:outputText value="#{bundle.ViewCentroMedicoLabel_idEspecialidad}"/>
+                        <h:outputText value="#{centroMedicoController.selected.idEspecialidad.nombreEspecialidad}" title="#{bundle.ViewCentroMedicoTitle_idEspecialidad}"/>
+                        <h:outputText value="#{bundle.ViewCentroMedicoLabel_idNivelAtencion}"/>
+                        <h:outputText value="#{centroMedicoController.selected.idNivelAtencion.nomNvatencion}" title="#{bundle.ViewCentroMedicoTitle_idNivelAtencion}"/>
+                        <h:outputText value="#{bundle.ViewCentroMedicoLabel_idHorario}"/>
+                        <h:outputText value="#{centroMedicoController.selected.idHorario.nomHorario}" title="#{bundle.ViewCentroMedicoTitle_idHorario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CentroMedicoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

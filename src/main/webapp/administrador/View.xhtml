@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdministradorViewDlg" widgetVar="AdministradorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAdministradorTitle}">
+            <h:form id="AdministradorViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{administradorController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAdministradorLabel_idAdministrador}"/>
+                        <h:outputText value="#{administradorController.selected.idAdministrador}" title="#{bundle.ViewAdministradorTitle_idAdministrador}"/>
+                        <h:outputText value="#{bundle.ViewAdministradorLabel_nomAdministrador}"/>
+                        <h:outputText value="#{administradorController.selected.nomAdministrador}" title="#{bundle.ViewAdministradorTitle_nomAdministrador}"/>
+                        <h:outputText value="#{bundle.ViewAdministradorLabel_apellidoAdministrador}"/>
+                        <h:outputText value="#{administradorController.selected.apellidoAdministrador}" title="#{bundle.ViewAdministradorTitle_apellidoAdministrador}"/>
+                        <h:outputText value="#{bundle.ViewAdministradorLabel_direccionAdmin}"/>
+                        <h:outputText value="#{administradorController.selected.direccionAdmin}" title="#{bundle.ViewAdministradorTitle_direccionAdmin}"/>
+                        <h:outputText value="#{bundle.ViewAdministradorLabel_telefonoAdmin}"/>
+                        <h:outputText value="#{administradorController.selected.telefonoAdmin}" title="#{bundle.ViewAdministradorTitle_telefonoAdmin}"/>
+                        <h:outputText value="#{bundle.ViewAdministradorLabel_idUsuario}"/>
+                        <h:outputText value="#{administradorController.selected.idUsuario}" title="#{bundle.ViewAdministradorTitle_idUsuario}"/>
+                        <h:outputText value="#{bundle.ViewAdministradorLabel_idEstado}"/>
+                        <h:outputText value="#{administradorController.selected.idEstado}" title="#{bundle.ViewAdministradorTitle_idEstado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AdministradorViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

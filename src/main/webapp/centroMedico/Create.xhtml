@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CentroMedicoCreateDlg" widgetVar="CentroMedicoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCentroMedicoTitle}">
+            <h:form id="CentroMedicoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{centroMedicoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCentroMedicoLabel_nomCm}" for="nomCm" />
+                        <p:inputText id="nomCm" value="#{centroMedicoController.selected.nomCm}" title="#{bundle.CreateCentroMedicoTitle_nomCm}" />
+                        <p:outputLabel value="#{bundle.CreateCentroMedicoLabel_direccionCm}" for="direccionCm" />
+                        <p:inputText id="direccionCm" value="#{centroMedicoController.selected.direccionCm}" title="#{bundle.CreateCentroMedicoTitle_direccionCm}" />
+                        <p:outputLabel value="#{bundle.CreateCentroMedicoLabel_telefonoCm}" for="telefonoCm" />
+                        <p:inputText id="telefonoCm" value="#{centroMedicoController.selected.telefonoCm}" title="#{bundle.CreateCentroMedicoTitle_telefonoCm}" />
+                        <p:outputLabel value="#{bundle.CreateCentroMedicoLabel_idLocalidad}" for="idLocalidad" />
+                        <p:selectOneMenu id="idLocalidad" value="#{centroMedicoController.selected.idLocalidad}" >
+                            <f:selectItems value="#{localidadesController.itemsAvailableSelectOne}"
+                                           var="idLocalidadItem"
+                                           itemValue="#{idLocalidadItem}"
+                                           itemLabel="#{idLocalidadItem.nombreLocalidad}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCentroMedicoLabel_idEspecialidad}" for="idEspecialidad" />
+                        <p:selectOneMenu id="idEspecialidad" value="#{centroMedicoController.selected.idEspecialidad}" >
+                            <f:selectItems value="#{especialidadController.itemsAvailableSelectOne}"
+                                           var="idEspecialidadItem"
+                                           itemValue="#{idEspecialidadItem}"
+                                           itemLabel="#{idEspecialidadItem.nombreEspecialidad}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCentroMedicoLabel_idNivelAtencion}" for="idNivelAtencion" />
+                        <p:selectOneMenu id="idNivelAtencion" value="#{centroMedicoController.selected.idNivelAtencion}" >
+                            <f:selectItems value="#{nivelAtencionController.itemsAvailableSelectOne}"
+                                           var="idNivelAtencionItem"
+                                           itemValue="#{idNivelAtencionItem}"
+                                           itemLabel="#{idNivelAtencionItem.nomNvatencion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCentroMedicoLabel_idHorario}" for="idHorario" />
+                        <p:selectOneMenu id="idHorario" value="#{centroMedicoController.selected.idHorario}" >
+                            <f:selectItems value="#{horariosController.itemsAvailableSelectOne}"
+                                           var="idHorarioItem"
+                                           itemValue="#{idHorarioItem}"
+                                           itemLabel="#{idHorarioItem.nomHorario}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{centroMedicoController.create}" value="#{bundle.Save}" update="display,:CentroMedicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'CentroMedicoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CentroMedicoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

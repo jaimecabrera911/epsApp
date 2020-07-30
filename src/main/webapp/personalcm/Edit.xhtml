@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonalcmEditDlg" widgetVar="PersonalcmEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonalcmTitle}">
+            <h:form id="PersonalcmEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personalcmController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePersonalcmLabel_idCm}" for="idCm" />
+                        <p:selectOneMenu id="idCm" value="#{personalcmController.selected.idCm}" >
+                            <f:selectItems value="#{centroMedicoController.itemsAvailableSelectOne}"
+                                           var="idCmItem"
+                                           itemValue="#{idCmItem}"
+                                           itemLabel="#{idCmItem.nomCm}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePersonalcmLabel_idPersonalmedico}" for="idPersonalmedico" />
+                        <p:selectOneMenu id="idPersonalmedico" value="#{personalcmController.selected.idPersonalmedico}" >
+                            <f:selectItems value="#{personalMedicoController.itemsAvailableSelectOne}"
+                                           var="idPersonalmedicoItem"
+                                           itemValue="#{idPersonalmedicoItem}"
+                                           itemLabel="#{idPersonalmedicoItem.nombrePm} #{idPersonalmedicoItem.apellidoPm}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personalcmController.update}" value="#{bundle.Save}" update="display,:PersonalcmListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonalcmEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonalcmEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

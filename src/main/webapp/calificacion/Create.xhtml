@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CalificacionCreateDlg" widgetVar="CalificacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCalificacionTitle}">
+            <h:form id="CalificacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{calificacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCalificacionLabel_nomCalificacion}" for="nomCalificacion" />
+                        <p:selectOneMenu id="nomCalificacion" value="#{calificacionController.selected.nomCalificacion}" >
+                            <f:selectItem itemLabel="Seleccione uno" itemValue="" />
+                            <f:selectItem itemLabel="Muy Mala" itemValue="Muy Mala" />
+                            <f:selectItem itemLabel="Mala" itemValue="Mala" />
+                            <f:selectItem itemLabel="Regular" itemValue="Regular" />
+                            <f:selectItem itemLabel="Buena" itemValue="Buena" />
+                            <f:selectItem itemLabel="Muy Buena" itemValue="Muy Buena" />
+                            <f:selectItem itemLabel="Excelente" itemValue="Excelente" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCalificacionLabel_descripcion}" for="descripcion" />
+                        <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{calificacionController.selected.descripcion}" title="#{bundle.CreateCalificacionTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateCalificacionLabel_idCita}" for="idCita" />
+                        <p:selectOneMenu id="idCita" value="#{calificacionController.selected.idCita}" >
+                            <f:selectItems value="#{citasController.itemsAvailableSelectOne}"
+                                           var="idCitaItem"
+                                           itemValue="#{idCitaItem}"
+                                           itemLabel="#{idCitaItem.idCita}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{calificacionController.create}" value="#{bundle.Save}" update="display,:CalificacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'CalificacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CalificacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

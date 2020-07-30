@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonalMedicoViewDlg" widgetVar="PersonalMedicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonalMedicoTitle}">
+            <h:form id="PersonalMedicoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personalMedicoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_idPersonalmedico}"/>
+                        <h:outputText value="#{personalMedicoController.selected.idPersonalmedico}" title="#{bundle.ViewPersonalMedicoTitle_idPersonalmedico}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_tipoIde}"/>
+                        <h:outputText value="#{personalMedicoController.selected.tipoIde}" title="#{bundle.ViewPersonalMedicoTitle_tipoIde}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_numIde}"/>
+                        <h:outputText value="#{personalMedicoController.selected.numIde}" title="#{bundle.ViewPersonalMedicoTitle_numIde}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_nombrePm}"/>
+                        <h:outputText value="#{personalMedicoController.selected.nombrePm}" title="#{bundle.ViewPersonalMedicoTitle_nombrePm}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_apellidoPm}"/>
+                        <h:outputText value="#{personalMedicoController.selected.apellidoPm}" title="#{bundle.ViewPersonalMedicoTitle_apellidoPm}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_direccionPm}"/>
+                        <h:outputText value="#{personalMedicoController.selected.direccionPm}" title="#{bundle.ViewPersonalMedicoTitle_direccionPm}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_telefonoPm}"/>
+                        <h:outputText value="#{personalMedicoController.selected.telefonoPm}" title="#{bundle.ViewPersonalMedicoTitle_telefonoPm}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_idUsuario}"/>
+                        <h:outputText value="#{personalMedicoController.selected.idUsuario.usuario}" title="#{bundle.ViewPersonalMedicoTitle_idUsuario}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_idEstado}"/>
+                        <h:outputText value="#{personalMedicoController.selected.idEstado.nombreEstado}" title="#{bundle.ViewPersonalMedicoTitle_idEstado}"/>
+                        <h:outputText value="#{bundle.ViewPersonalMedicoLabel_idEspecialidad}"/>
+                        <h:outputText value="#{personalMedicoController.selected.idEspecialidad.nombreEspecialidad}" title="#{bundle.ViewPersonalMedicoTitle_idEspecialidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PersonalMedicoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

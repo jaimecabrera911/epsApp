@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CitasCreateDlg" widgetVar="CitasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCitasTitle}">
+            <h:form id="CitasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{citasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCitasLabel_fechaCita}" for="fechaCita" />
+                        <p:calendar id="fechaCita" pattern="MM/dd/yyyy HH:mm:ss" value="#{citasController.selected.fechaCita}" title="#{bundle.EditCitasTitle_fechaCita}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCitasLabel_estadoCita}" for="estadoCita" />
+                        <p:selectOneMenu id="estadoCita" value="#{citasController.selected.estadoCita}" >
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItem itemLabel="DISPONIBLE" itemValue="DISPONIBLE" />
+                            <f:selectItem itemLabel="ASIGNADA" itemValue="ASIGNADA" />
+                            <f:selectItem itemLabel="CULMINADA" itemValue="CULMINADA" />
+                            <f:selectItem itemLabel="NO ASISTIO" itemValue="NO ASISTIO" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCitasLabel_idPaciente}" for="idPaciente" />
+                        <p:selectOneMenu id="idPaciente" value="#{citasController.selected.idPaciente}" >
+                            <f:selectItems value="#{pacientesController.itemsAvailableSelectOne}"
+                                           var="idPacienteItem"
+                                           itemValue="#{idPacienteItem}"
+                                           itemLabel="#{idPacienteItem.tipoDocumento} #{idPacienteItem.numDoc} #{idPacienteItem.primerNombre} #{idPacienteItem.primerApellido}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCitasLabel_idPersonalcm}" for="idPersonalcm" />
+                        <p:selectOneMenu id="idPersonalcm" value="#{citasController.selected.idPersonalcm}" >
+                            <f:selectItems value="#{personalcmController.itemsAvailableSelectOne}"
+                                           var="idPersonalcmItem"
+                                           itemValue="#{idPersonalcmItem}"
+                                           itemLabel="#{idPersonalcmItem.idPersonalmedico.tipoIde} #{idPersonalcmItem.idPersonalmedico.numIde} #{idPersonalcmItem.idPersonalmedico.nombrePm} #{idPersonalcmItem.idPersonalmedico.apellidoPm}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCitasLabel_idConvenio}" for="idConvenio" />
+                        <p:selectOneMenu id="idConvenio" value="#{citasController.selected.idConvenio}" >
+                            <f:selectItems value="#{conveniosController.itemsAvailableSelectOne}"
+                                           var="idConvenioItem"
+                                           itemValue="#{idConvenioItem}"
+                                           itemLabel="#{idConvenioItem.nomConvenio}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{citasController.create}" value="#{bundle.Save}" update="display,:CitasListForm:datalist,:growl" oncomplete="handleSubmit(args,'CitasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CitasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConveniosCreateDlg" widgetVar="ConveniosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConveniosTitle}">
+            <h:form id="ConveniosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conveniosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConveniosLabel_nomConvenio}" for="nomConvenio" />
+                        <p:inputText id="nomConvenio" value="#{conveniosController.selected.nomConvenio}" title="#{bundle.CreateConveniosTitle_nomConvenio}" />
+                        <p:outputLabel value="#{bundle.EditConveniosLabel_idEps}" for="idEps" />
+                        <p:selectOneMenu id="idEps" value="#{conveniosController.selected.idEps}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{epsController.itemsAvailableSelectOne}"
+                                           var="idEpsItem"
+                                           itemValue="#{idEpsItem}"
+                                           itemLabel="#{idEpsItem.nombreEps}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConveniosLabel_idCm}" for="idCm" />
+                        <p:selectOneMenu id="idCm" value="#{conveniosController.selected.idCm}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{centroMedicoController.itemsAvailableSelectOne}"
+                                           var="idCmItem"
+                                           itemValue="#{idCmItem}"
+                                           itemLabel="#{idCmItem.nomCm}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{conveniosController.create}" value="#{bundle.Save}" update="display,:ConveniosListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConveniosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConveniosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

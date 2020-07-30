@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CalificacionViewDlg" widgetVar="CalificacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCalificacionTitle}">
+            <h:form id="CalificacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{calificacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCalificacionLabel_idCalificacion}"/>
+                        <h:outputText value="#{calificacionController.selected.idCalificacion}" title="#{bundle.ViewCalificacionTitle_idCalificacion}"/>
+                        <h:outputText value="#{bundle.ViewCalificacionLabel_nomCalificacion}"/>
+                        <h:outputText value="#{calificacionController.selected.nomCalificacion}" title="#{bundle.ViewCalificacionTitle_nomCalificacion}"/>
+                        <h:outputText value="#{bundle.ViewCalificacionLabel_descripcion}"/>
+                        <h:outputText value="#{calificacionController.selected.descripcion}" title="#{bundle.ViewCalificacionTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewCalificacionLabel_idCita}"/>
+                        <h:outputText value="#{calificacionController.selected.idCita}" title="#{bundle.ViewCalificacionTitle_idCita}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CalificacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

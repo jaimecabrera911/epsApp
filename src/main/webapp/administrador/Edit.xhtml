@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdministradorEditDlg" widgetVar="AdministradorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAdministradorTitle}">
+            <h:form id="AdministradorEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{administradorController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAdministradorLabel_nomAdministrador}" for="nomAdministrador" />
+                        <p:inputText id="nomAdministrador" value="#{administradorController.selected.nomAdministrador}" title="#{bundle.EditAdministradorTitle_nomAdministrador}" />
+                        <p:outputLabel value="#{bundle.EditAdministradorLabel_apellidoAdministrador}" for="apellidoAdministrador" />
+                        <p:inputText id="apellidoAdministrador" value="#{administradorController.selected.apellidoAdministrador}" title="#{bundle.EditAdministradorTitle_apellidoAdministrador}" />
+                        <p:outputLabel value="#{bundle.EditAdministradorLabel_direccionAdmin}" for="direccionAdmin" />
+                        <p:inputText id="direccionAdmin" value="#{administradorController.selected.direccionAdmin}" title="#{bundle.EditAdministradorTitle_direccionAdmin}" />
+                        <p:outputLabel value="#{bundle.EditAdministradorLabel_telefonoAdmin}" for="telefonoAdmin" />
+                        <p:inputText id="telefonoAdmin" value="#{administradorController.selected.telefonoAdmin}" title="#{bundle.EditAdministradorTitle_telefonoAdmin}" />
+                        <p:outputLabel value="#{bundle.EditAdministradorLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{administradorController.selected.idUsuario}" >
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"
+                                           itemLabel="#{idUsuarioItem.usuario}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAdministradorLabel_idEstado}" for="idEstado" />
+                        <p:selectOneMenu id="idEstado" value="#{administradorController.selected.idEstado}" >
+                            <f:selectItems value="#{estadoController.itemsAvailableSelectOne}"
+                                           var="idEstadoItem"
+                                           itemValue="#{idEstadoItem}"
+                                           itemLabel="#{idEstadoItem.nombreEstado}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{administradorController.update}" value="#{bundle.Save}" update="display,:AdministradorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AdministradorEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AdministradorEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
