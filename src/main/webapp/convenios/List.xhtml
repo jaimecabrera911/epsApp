@@ -51,6 +51,18 @@
                             </f:facet>
                             <h:outputText value="#{item.idCm.nomCm}"/>
                         </p:column>
+                        <p:column sortBy="#{item.idCm.idLocalidad.nombreLocalidad}" filterBy="#{item.idCm.idLocalidad.nombreLocalidad}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Localidad"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCm.idLocalidad.nombreLocalidad}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idCm.idHorario.nomHorario}" filterBy="#{item.idCm.idHorario.nomHorario}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Horarios"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCm.idHorario.nomHorario}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="pi pi-plus"   value="#{bundle.Create}" actionListener="#{conveniosController.prepareCreate}" update=":ConveniosCreateForm" oncomplete="PF('ConveniosCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="pi pi-search" value="#{bundle.View}" update=":ConveniosViewForm" oncomplete="PF('ConveniosViewDialog').show()" disabled="#{empty conveniosController.selected}"/>
