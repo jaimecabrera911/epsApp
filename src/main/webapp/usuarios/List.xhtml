@@ -27,31 +27,31 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.idUsuario}" filterBy="#{item.idUsuario}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuariosTitle_idUsuario}"/>
                             </f:facet>
                             <h:outputText value="#{item.idUsuario}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.usuario}" filterBy="#{item.usuario}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuariosTitle_usuario}"/>
                             </f:facet>
                             <h:outputText value="#{item.usuario}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.password}" filterBy="#{item.password}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuariosTitle_password}"/>
                             </f:facet>
                             <h:outputText value="#{item.password}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.idPerfil.nombrePerfil}" filterBy="#{item.idPerfil.nombrePerfil}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuariosTitle_idPerfil}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPerfil.nombrePerfil}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.idEstado.nombreEstado}" filterBy="#{item.idEstado.nombreEstado}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuariosTitle_idEstado}"/>
                             </f:facet>
@@ -62,6 +62,14 @@
                             <p:commandButton id="viewButton"   icon="pi pi-search" value="#{bundle.View}" update=":UsuariosViewForm" oncomplete="PF('UsuariosViewDialog').show()" disabled="#{empty usuariosController.selected}"/>
                             <p:commandButton id="editButton"   icon="pi pi-pencil" value="#{bundle.Edit}" update=":UsuariosEditForm" oncomplete="PF('UsuariosEditDialog').show()" disabled="#{empty usuariosController.selected}"/>
                             <p:commandButton id="deleteButton" icon="pi pi-trash"  value="#{bundle.Delete}" actionListener="#{usuariosController.destroy}" update=":growl,datalist" disabled="#{empty usuariosController.selected}"/>
+                            <div class="exportarDatos">
+                                <p:commandButton class="excel" icon="pi pi-file-excel" value="Excel" ajax="false">
+                                    <p:dataExporter type="xls" target="datalist" fileName="usuarios"/>
+                                </p:commandButton>
+                                <p:commandButton class="pdf" icon="pi pi-file-pdf" value="PDF" ajax="false">
+                                    <p:dataExporter type="pdf" target="datalist" fileName="usuarios"/>
+                                </p:commandButton>
+                            </div>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

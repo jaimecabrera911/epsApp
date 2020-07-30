@@ -27,19 +27,19 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.idComentario}" filterBy="#{item.idComentario}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListComentarioEpsTitle_idComentario}"/>
                             </f:facet>
                             <h:outputText value="#{item.idComentario}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.comentario}" filterBy="#{item.comentario}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListComentarioEpsTitle_comentario}"/>
                             </f:facet>
                             <h:outputText value="#{item.comentario}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.idCalificacion}" filterBy="#{item.idCalificacion}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListComentarioEpsTitle_idCalificacion}"/>
                             </f:facet>
@@ -50,6 +50,14 @@
                             <p:commandButton id="viewButton"   icon="pi pi-search" value="#{bundle.View}" update=":ComentarioEpsViewForm" oncomplete="PF('ComentarioEpsViewDialog').show()" disabled="#{empty comentarioEpsController.selected}"/>
                             <p:commandButton id="editButton"   icon="pi pi-pencil" value="#{bundle.Edit}" update=":ComentarioEpsEditForm" oncomplete="PF('ComentarioEpsEditDialog').show()" disabled="#{empty comentarioEpsController.selected}"/>
                             <p:commandButton id="deleteButton" icon="pi pi-trash"  value="#{bundle.Delete}" actionListener="#{comentarioEpsController.destroy}" update=":growl,datalist" disabled="#{empty comentarioEpsController.selected}"/>
+                            <div class="exportarDatos">
+                                <p:commandButton class="excel" icon="pi pi-file-excel" value="Excel" ajax="false">
+                                    <p:dataExporter type="xls" target="datalist" fileName="usuarios"/>
+                                </p:commandButton>
+                                <p:commandButton class="pdf" icon="pi pi-file-pdf" value="PDF" ajax="false">
+                                    <p:dataExporter type="pdf" target="datalist" fileName="usuarios"/>
+                                </p:commandButton>
+                            </div>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

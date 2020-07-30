@@ -27,13 +27,13 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.idCita}" filterBy="#{item.idCita}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCitasTitle_idCita}"/>
                             </f:facet>
                             <h:outputText value="#{item.idCita}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.fechaCita}" filterBy="#{item.fechaCita}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCitasTitle_fechaCita}"/>
                             </f:facet>
@@ -41,25 +41,25 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.estadoCita}" filterBy="#{item.estadoCita}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCitasTitle_estadoCita}"/>
                             </f:facet>
                             <h:outputText value="#{item.estadoCita}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.idPaciente.tipoDocumento} #{item.idPaciente.numDoc} #{item.idPaciente.primerNombre} #{item.idPaciente.primerApellido}" filterBy="#{item.idPaciente.tipoDocumento} #{item.idPaciente.numDoc} #{item.idPaciente.primerNombre} #{item.idPaciente.primerApellido}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCitasTitle_idPaciente}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPaciente.tipoDocumento} #{item.idPaciente.numDoc} #{item.idPaciente.primerNombre} #{item.idPaciente.primerApellido}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.idPersonalcm.idPersonalmedico.tipoIde} #{item.idPersonalcm.idPersonalmedico.numIde} #{item.idPersonalcm.idPersonalmedico.nombrePm} #{item.idPersonalcm.idPersonalmedico.apellidoPm}" filterBy="#{item.idPersonalcm.idPersonalmedico.tipoIde} #{item.idPersonalcm.idPersonalmedico.numIde} #{item.idPersonalcm.idPersonalmedico.nombrePm} #{item.idPersonalcm.idPersonalmedico.apellidoPm}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCitasTitle_idPersonalcm}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPersonalcm.idPersonalmedico.tipoIde} #{item.idPersonalcm.idPersonalmedico.numIde} #{item.idPersonalcm.idPersonalmedico.nombrePm} #{item.idPersonalcm.idPersonalmedico.apellidoPm}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.idConvenio.nomConvenio}" filterBy="#{item.idConvenio.nomConvenio}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCitasTitle_idConvenio}"/>
                             </f:facet>
@@ -70,6 +70,14 @@
                             <p:commandButton id="viewButton"   icon="pi pi-search" value="#{bundle.View}" update=":CitasViewForm" oncomplete="PF('CitasViewDialog').show()" disabled="#{empty citasController.selected}"/>
                             <p:commandButton id="editButton"   icon="pi pi-pencil" value="#{bundle.Edit}" update=":CitasEditForm" oncomplete="PF('CitasEditDialog').show()" disabled="#{empty citasController.selected}"/>
                             <p:commandButton id="deleteButton" icon="pi pi-trash"  value="#{bundle.Delete}" actionListener="#{citasController.destroy}" update=":growl,datalist" disabled="#{empty citasController.selected}"/>
+                            <div class="exportarDatos">
+                                <p:commandButton class="excel" icon="pi pi-file-excel" value="Excel" ajax="false">
+                                    <p:dataExporter type="xls" target="datalist" fileName="usuarios"/>
+                                </p:commandButton>
+                                <p:commandButton class="pdf" icon="pi pi-file-pdf" value="PDF" ajax="false">
+                                    <p:dataExporter type="pdf" target="datalist" fileName="usuarios"/>
+                                </p:commandButton>
+                            </div>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
